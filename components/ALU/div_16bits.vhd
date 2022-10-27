@@ -10,16 +10,15 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity add_16bits is
-    Port (C_in:     in std_logic;
-          Din1:     in std_logic_vector(15 downto 0);
-          Din2:     in std_logic_vector(15 downto 0);
-          Dout:     out std_logic_vector(15 downto 0)
-         );
-end add_16bits;
+entity div_16bits is
+    Port (a:        in std_logic_vector(15 downto 0);
+          b:        in std_logic_vector(15 downto 0);
+          result:   out std_logic_vector(15 downto 0)
+          );
+end div_16bits;
 
-architecture Behavioral of add_16bits is
+architecture Behavioral of div_16bits is
 
 begin
-    Dout <= std_logic_vector(unsigned(Din1) + unsigned(Din2) + C_in);
+    result <= std_logic_vector(unsigned(a) / unsigned(b));
 end Behavioral;
