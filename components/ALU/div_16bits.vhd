@@ -20,5 +20,14 @@ end div_16bits;
 architecture Behavioral of div_16bits is
 
 begin
-    result <= std_logic_vector(signed(a) / signed(b));
+process(a,b)
+variable output: std_logic_vector(15 downto 0);
+begin
+    if b = x"0000" then
+        output := x"0000";
+    else
+        output := std_logic_vector(unsigned(a)/unsigned(b));
+    end if;
+    result <= output;
+end process;
 end Behavioral;

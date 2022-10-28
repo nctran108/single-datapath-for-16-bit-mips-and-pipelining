@@ -26,6 +26,7 @@ architecture Behavioral of registers is
 type register_type is array (0 to 15) of std_logic_vector(15 downto 0);
 signal register_array : register_type := (others => x"0000");
 
+
 begin
 clock: process(clk,RegWrite)
 begin
@@ -40,7 +41,7 @@ end process clock;
 
 process(r1,r2)
 begin
-    rd1 <= register_array(to_integer(unsigned(r1)));
-    rd2 <= register_array(to_integer(unsigned(r2)));
+    rd1 <= register_array(TO_INTEGER(unsigned(r1)));
+    rd2 <= register_array(TO_INTEGER(unsigned(r2)));
 end process;
 end Behavioral;

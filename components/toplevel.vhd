@@ -11,17 +11,17 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity toplevel is
-    Port (clk:          in std_logic;
-          rst:          in std_logic         
+    Port (clk:                                    in std_logic;
+          rst:                                    in std_logic;
+          signal RegDst, Jump, Branch, MemRead:   in std_logic;
+          signal MemtoReg, MemWrite:              in std_logic;
+          signal ALUSrc, RegWrite:                in std_logic;
+          signal ALUOp:                           in std_logic_vector(3 downto 0)        
           );
 end toplevel;
 
 architecture simple of toplevel is
-signal RegDst, Jump, Branch, MemRead:   std_logic;
-signal MemtoReg, MemWrite:              std_logic;
-signal ALUSrc, RegWrite:                std_logic;
 signal ALUZero, and_result:             std_logic;
-signal ALUOp:                           std_logic_vector(3 downto 0);
 signal pc_sig:                          std_logic_vector(15 downto 0);
 signal instruction:                     std_logic_vector(15 downto 0);
 signal readD1, readD2:                  std_logic_vector(15 downto 0);
