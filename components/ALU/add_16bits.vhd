@@ -19,7 +19,8 @@ entity add_16bits is
 end add_16bits;
 
 architecture Behavioral of add_16bits is
-
+signal Cin_sig:         std_logic_vector(15 downto 0) := x"0000";
 begin
-    Dout <= std_logic_vector(unsigned(Din1) + unsigned(Din2) + C_in);
+    Cin_sig <= "000000000000000" & C_in;
+    Dout <= std_logic_vector(signed(Din1) + signed(Din2) + signed(Cin_sig));
 end Behavioral;

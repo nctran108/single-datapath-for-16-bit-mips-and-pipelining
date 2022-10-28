@@ -32,7 +32,7 @@ begin
     elsif size < 0 then
         Dout <= Din1;
     else
-        Dout <= x"0000";
+        Dout <= (others => '0');
     end if;
 end process;
 end Behavioral;
