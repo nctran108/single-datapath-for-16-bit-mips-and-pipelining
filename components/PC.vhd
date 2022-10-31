@@ -12,7 +12,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity PC is
     Port (CLK:      in std_logic;
-          RST:      in std_logic;
+          rst:      in std_logic;
           PCin:     in std_logic_vector(15 downto 0);
           PCout:    out std_logic_vector(15 downto 0));
 end PC;
@@ -20,22 +20,22 @@ end PC;
 architecture Behavioral of PC is
 
 begin
-clock: process(CLK,RST)
+clock: process(CLK,rst)
 variable input: std_logic_vector(15 downto 0);
-variable ouput: std_logic_vector(15 downto 0);
+variable output: std_logic_vector(15 downto 0) := x"0000";
 begin
     input := PCin;
-    if RST = '1' then
-        PCout <= (others => '0');
+    if rst = '1' then
+        output := x"0000";
     else
         if falling_edge(CLK) then
             -- update every falling edge
-            ouput := input;
+            output := input;
         else
-            ouput := ouput;
+            output := output;
         end if;
-        PCout <= ouput;
     end if;
+    PCout <= output;
 end process clock;
 
 end Behavioral;

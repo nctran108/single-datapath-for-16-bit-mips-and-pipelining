@@ -39,9 +39,7 @@ begin
     end if;
 end process clock;
 
-process(r1,r2)
-begin
-    rd1 <= register_array(TO_INTEGER(unsigned(r1)));
-    rd2 <= register_array(TO_INTEGER(unsigned(r2)));
-end process;
+rd1 <= register_array(TO_INTEGER(unsigned(r1)));
+rd2 <= register_array(TO_INTEGER(unsigned(r2)));
+
 end Behavioral;

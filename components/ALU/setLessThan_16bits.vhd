@@ -13,7 +13,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity setLessThan_16bits is
     Port (a:        in std_logic_vector(15 downto 0);
           b:        in std_logic_vector(15 downto 0);
-          result:   out std_logic_vector(15 downto 0)
+          rt:   out std_logic_vector(15 downto 0)
           );
 end setLessThan_16bits;
 
@@ -21,14 +21,14 @@ architecture Behavioral of setLessThan_16bits is
 
 begin
 process(a,b)
-variable a_sig,b_sig: integer := 0;
+variable a_sig,b_sig: signed(15 downto 0);
 begin
-    a_sig := to_integer(signed(a));
-    b_sig := to_integer(signed(b));
-    if a < b then
-        result <= x"0001";
+    a_sig := signed(a);
+    b_sig := signed(b);
+    if a_sig < b_sig then
+        rt <= x"0001";
     else
-        result <= x"0000";
+        rt <= x"0000";
     end if;
 end process;
 

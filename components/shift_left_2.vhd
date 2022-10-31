@@ -25,14 +25,6 @@ process(Din1,Din2)
 variable size: integer := 0;
 begin
     size := to_integer(unsigned(Din2));
-    if size < 16 and size > 0 then
-        for i in 0 to size-1 loop
-            Dout <= Din1(N-2 downto 0) & "0";
-        end loop;
-    elsif size < 0 then
-        Dout <= Din1;
-    else
-        Dout <= (others => '0');
-    end if;
+    Dout <= std_logic_vector(unsigned(Din1) sll size);
 end process;
 end Behavioral;

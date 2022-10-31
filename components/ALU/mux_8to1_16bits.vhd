@@ -12,15 +12,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity mux_8to1_16bits is
     Port (sel:      in std_logic_vector(2 downto 0);
-          a:      in std_logic_vector(15 downto 0);
-          b:      in std_logic_vector(15 downto 0);
-          c:      in std_logic_vector(15 downto 0);
-          d:      in std_logic_vector(15 downto 0);
-          e:      in std_logic_vector(15 downto 0);
-          f:      in std_logic_vector(15 downto 0);
-          g:      in std_logic_vector(15 downto 0);
-          h:      in std_logic_vector(15 downto 0);
-          result: out std_logic_vector(15 downto 0)          
+          a:        in std_logic_vector(15 downto 0);
+          b:        in std_logic_vector(15 downto 0);
+          c:        in std_logic_vector(15 downto 0);
+          d:        in std_logic_vector(15 downto 0);
+          e:        in std_logic_vector(15 downto 0);
+          f:        in std_logic_vector(15 downto 0);
+          g:        in std_logic_vector(15 downto 0);
+          h:        in std_logic_vector(15 downto 0);
+          output:   out std_logic_vector(15 downto 0)          
           );
 end mux_8to1_16bits;
 
@@ -29,24 +29,23 @@ architecture Behavioral of mux_8to1_16bits is
 begin
 process(sel,a,b,c,d,e,f,g,h)
 begin
-    case sel is
-    when "000" =>
-        result <= a;
-    when "001" =>
-        result <= b;
-    when "010" =>
-        result <= c;
-    when "011" =>
-        result <= d;
-    when "100" =>
-        result <= e;
-    when "101" =>
-        result <= f;
-    when "110" =>
-        result <= g;
-    when others =>
-        result <= h;
-    end case;
+    if sel = "000" then
+        output <= a;
+    elsif sel = "001" then
+        output <= b;
+    elsif sel = "010" then
+        output <= c;
+    elsif sel = "011" then
+        output <= d;
+    elsif sel = "100" then
+        output <= e;
+    elsif sel = "101" then
+        output <= f;
+    elsif sel = "110" then
+        output <= g;
+    else
+        output <= h;
+    end if;
 end process;
 
 end Behavioral;

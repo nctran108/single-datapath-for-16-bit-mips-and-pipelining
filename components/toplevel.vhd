@@ -11,12 +11,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity toplevel is
-    Port (clk:                                    in std_logic;
-          rst:                                    in std_logic;
-          signal RegDst, Jump, Branch, MemRead:   in std_logic;
-          signal MemtoReg, MemWrite:              in std_logic;
-          signal ALUSrc, RegWrite:                in std_logic;
-          signal ALUOp:                           in std_logic_vector(3 downto 0)        
+    Port (clk, rst:                               in std_logic     
           );
 end toplevel;
 
@@ -34,14 +29,34 @@ signal instAdder, branchAdder:          std_logic_vector(15 downto 0);
 signal shift_r1:                        std_logic_vector(11 downto 0);
 signal jump_addr, shift_r2:             std_logic_vector(15 downto 0);
 
+signal RegDst, Jump, Branch, MemRead:   std_logic;
+signal MemtoReg, MemWrite:              std_logic;
+signal ALUSrc, RegWrite:                std_logic;
+signal ALUOp:                           std_logic_vector(3 downto 0);   
+
 begin
 -- PC
 Program_counter: entity work.PC(Behavioral)
                 port map(clk => clk,
-                         RST => rst,
+                         rst => rst,
                          PCin => mux_r4,
                          PCout => pc_sig
                          );
+                         
+--control
+countrolUnit: entity work.control(Behavioral)
+              port map(opcode => instruction(15 downto 12),
+                       RegDst => RegDst,
+                       Jump => Jump,
+                       Branch => Branch,
+                       MemRead => MemRead,
+                       MemtoReg => MemtoReg,
+                       MemWrite => MemWrite,
+                       ALUSrc => ALUSrc,
+                       RegWrite => RegWrite,
+                       ALUOp => ALUOp
+                       );
+                         
 -- jump
 adder: entity work.adder(Behavioral)
        port map(Din => pc_sig,
@@ -49,7 +64,7 @@ adder: entity work.adder(Behavioral)
                 );
                 
 instruction_memory: entity work.instruction_memory(Behavioral)
-                    port map(clk => clk,
+                    port map(
                              ReadAddr => pc_sig,
                              instruction => instruction
                              );
@@ -60,7 +75,7 @@ shift_left_2: entity work.shift_left_2(Behavioral)
                        Din2 => x"002",
                        Dout => shift_r1
                        );
-jump_addr <= std_logic_vector(unsigned(instAdder) + (x"0" & unsigned(shift_r1)));                     
+jump_addr <= instAdder(15 downto 12) & std_logic_vector(unsigned(instAdder(11 downto 0)) + unsigned(shift_r1));                     
 
 -- branch
 shift_left_2_2: entity work.shift_left_2(Behavioral)
