@@ -21,9 +21,35 @@ entity dataMemory is
 end dataMemory;
 
 architecture Behavioral of dataMemory is
-constant MAX_SIZE: integer:= 65536;
+constant MAX_SIZE: integer:= 64;
 type mem is array (0 to MAX_SIZE) of std_logic_vector(15 downto 0);
-signal memArray: mem := (others => x"0000");
+signal memArray: mem := (  
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0000",
+                           x"0101",
+                           x"0000",
+                           x"0110",
+                           x"0000",
+                           x"0011",
+                           x"0000",
+                           x"00f0",
+                           x"0000",
+                           x"00ff",
+                           others => x"0000");
 
 begin
 process(clk,memWrite,memRead,Addr,writeData)
@@ -34,15 +60,18 @@ if falling_edge(clk) then
     if memWrite = '1' and memRead = '0' then
         memArray(index) <= writeData;
         readData <= x"0000";
-    elsif memRead = '1' and memWrite = '0' then
-        memArray(index) <= memArray(index);
-        readData <= memArray(index);
     else
-        memArray(index) <= memArray(index);
         readData <= addr;
         end if;
     end if;
-
+if rising_edge(clk) then
+    if memRead = '1' and memWrite = '0' then
+        memArray(index) <= memArray(index);
+        readData <= memArray(index);
+    else
+        readData <= addr;
+        end if;
+    end if;
 end process;
 
 end Behavioral;
