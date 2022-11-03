@@ -20,7 +20,7 @@ end PC;
 architecture Behavioral of PC is
 
 begin
-clock: process(CLK,rst)
+clock: process(CLK,rst,PCin)
 variable input: std_logic_vector(15 downto 0);
 variable output: std_logic_vector(15 downto 0) := x"0000";
 begin
@@ -31,8 +31,6 @@ begin
         if falling_edge(CLK) then
             -- update every falling edge
             output := input;
-        else
-            output := output;
         end if;
     end if;
     PCout <= output;

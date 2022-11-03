@@ -58,15 +58,11 @@ begin
 index := TO_INTEGER(unsigned(addr));
 if falling_edge(clk) then
     if memWrite = '1' and memRead = '0' then
-        memArray(index) <= writeData;
-        readData <= x"0000";
-    else
-        readData <= addr;
+        memArray(index) <= writeData;   
         end if;
     end if;
 if rising_edge(clk) then
     if memRead = '1' and memWrite = '0' then
-        memArray(index) <= memArray(index);
         readData <= memArray(index);
     else
         readData <= addr;

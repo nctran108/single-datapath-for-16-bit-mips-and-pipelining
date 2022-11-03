@@ -21,7 +21,7 @@ signal clk_sig:     std_logic := '0';
 signal rst_sig:    std_logic := '0';
 
 begin
-DUT: entity work.toplevel(simple)
+DUT: entity work.toplevel(Structural)
     port map(clk => clk_sig,
              rst => rst_sig);
 

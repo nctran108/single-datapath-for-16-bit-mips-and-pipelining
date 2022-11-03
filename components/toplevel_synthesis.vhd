@@ -7,15 +7,17 @@ use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library UNISIM;
+use UNISIM.VComponents.all;
 
-entity toplevel is
-    Port (clk, rst:  in std_logic    
+entity toplevel_synthesis is
+    Port (
+          SYS_CLK, CPU_RESETN:  in std_logic;    
+          LED:                  out std_logic_vector(15 downto 0)
           );
-end toplevel;
+end toplevel_synthesis;
 
-architecture Structural of toplevel is
+architecture structural of toplevel_synthesis is
 signal ALUZero, and_result:             std_logic;
 signal pc_sig:                          std_logic_vector(15 downto 0);
 signal instruction:                     std_logic_vector(15 downto 0);
@@ -34,8 +36,18 @@ signal MemtoReg, MemWrite:              std_logic;
 signal ALUSrc, RegWrite:                std_logic;
 signal ALUOp:                           std_logic_vector(3 downto 0);   
 
-
+signal clk,rst  : std_logic := '0';
 begin
+
+rst <= not CPU_RESETN;
+
+LED <= instruction;
+
+-- clock divided
+clock_devider: entity work.clock_divider(behavior)
+	               generic map(DIVISOR => 5000000)
+	               port map(mclk => SYS_CLK, sclk => clk);
+
 
 -- PC
 Program_counter: entity work.PC(Behavioral)
@@ -167,4 +179,5 @@ mux2: entity work.mux_2to1_nbits(Behavioral)
                Dout => mux_r2
                );
 
-end Structural;
+
+end structural;
