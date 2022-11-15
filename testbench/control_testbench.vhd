@@ -35,15 +35,15 @@ type RegWrite_array is array(0 to NUM_VALS-1) of std_logic;
 type ALUOp_array is array(0 to NUM_VALS-1) of std_logic_vector(3 downto 0); 
 
 constant opcode_val : opcode_array := (x"0",x"1",x"2",x"3",x"4",x"5",x"6",x"7",x"8",x"9",x"a",x"b",x"c",x"d",x"e",x"f");
-constant RegDst_val : RegDst_array := ('0','0','1','1','1','1','0','0','0','1','1','0','0','0','0','0');
-constant Jump_val : Jump_array := ('0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0');
+constant RegDst_val : RegDst_array := ('0','0','1','1','1','0','0','0','1','1','1','0','0','0','0','0');
+constant Jump_val : Jump_array := ('0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0');
 constant Branch_val : Branch_array := ('0','0','0','0','0','0','0','0','0','0','0','1','1','0','0','0');
-constant MemRead_val : MemRad_array := ('0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0');
-constant MemtoReg_val : MemtoReg_array := ('0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0');
-constant MemWrite_val : MemWrite_array := ('0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0');
-constant ALUSrc_val : ALUSrc_array := ('0','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1');
-constant RegWrite_val : RegWrite_array := ('0','1','1','1','1','1','1','0','0','1','1','0','0','1','1','1');
-constant ALUOp_val : ALUOp_array := (x"0",x"0",x"0",x"8",x"1",x"3",x"0",x"0",x"0",x"2",x"5",x"0",x"0",x"3",x"6",x"4");
+constant MemRead_val : MemRad_array := ('0','0','0','0','0','1','0','0','0','0','0','0','0','0','0','0');
+constant MemtoReg_val : MemtoReg_array := ('0','0','0','0','0','1','0','0','0','0','0','0','0','0','0','0');
+constant MemWrite_val : MemWrite_array := ('0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0');
+constant ALUSrc_val : ALUSrc_array := ('0','1','0','0','0','1','1','0','0','0','0','0','0','1','1','1');
+constant RegWrite_val : RegWrite_array := ('0','1','1','1','1','1','0','0','1','1','1','0','0','1','1','1');
+constant ALUOp_val : ALUOp_array := (x"0",x"0",x"0",x"8",x"1",x"0",x"0",x"0",x"4",x"2",x"5",x"f",x"7",x"4",x"6",x"3");
 
 begin
 

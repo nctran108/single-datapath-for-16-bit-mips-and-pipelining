@@ -19,6 +19,7 @@ constant NUM_VALS : integer := 10;
 
 signal clk_sig:     std_logic := '0';
 signal rst_sig:    std_logic := '0';
+signal count:   integer := 0;
 
 begin
 DUT: entity work.toplevel(Structural)
@@ -32,4 +33,10 @@ end process clock;
 
 rst_sig <= '0', '1' after 2 ns, '0' after 4 ns;
 
+process(clk_sig)
+begin
+    if falling_edge(clk_sig) then
+        count <= count + 1;
+    end if;
+end process;
 end Behavioral;
