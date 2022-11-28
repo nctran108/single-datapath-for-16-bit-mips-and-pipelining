@@ -22,7 +22,7 @@ signal rst_sig:    std_logic := '0';
 signal count:   integer := 0;
 
 begin
-DUT: entity work.toplevel(Structural)
+DUT: entity work.toplevel_pipeline(Structural)
     port map(clk => clk_sig,
              rst => rst_sig);
 

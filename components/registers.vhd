@@ -39,7 +39,11 @@ begin
     end if;
 end process clock;
 
-rd1 <= register_array(TO_INTEGER(unsigned(r1)));
-rd2 <= register_array(TO_INTEGER(unsigned(r2)));
-
+process(clk)
+begin
+    if rising_edge(clk) then
+        rd1 <= register_array(TO_INTEGER(unsigned(r1)));
+        rd2 <= register_array(TO_INTEGER(unsigned(r2)));
+    end if;
+end process;
 end Behavioral;
