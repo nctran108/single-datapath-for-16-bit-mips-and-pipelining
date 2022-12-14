@@ -25,7 +25,7 @@ entity ID_EX is
           ID_readData1:         in std_logic_vector(15 downto 0);
           ID_readData2:         in std_logic_vector(15 downto 0);
           ID_signExtend:        in std_logic_vector(15 downto 0);
-          ID_jumpAddr:        in std_logic_vector(15 downto 0);
+          ID_rs:        in std_logic_vector(3 downto 0);
           ID_rt:        in std_logic_vector(3 downto 0);
           ID_rd:        in std_logic_vector(3 downto 0);
           EX_RegDst:   out std_logic;
@@ -37,11 +37,10 @@ entity ID_EX is
           EX_ALUSrc:   out std_logic;
           EX_RegWrite: out std_logic;
           EX_ALUOp:    out std_logic_vector(3 downto 0);
-          EX_instructionAdd:    out std_logic_vector(15 downto 0);
           EX_readData1:         out std_logic_vector(15 downto 0);
           EX_readData2:         out std_logic_vector(15 downto 0);
           EX_signExtend:        out std_logic_vector(15 downto 0);
-          EX_jumpAddr:        out std_logic_vector(15 downto 0);
+          EX_rs:        out std_logic_vector(3 downto 0);
           EX_rt:        out std_logic_vector(3 downto 0);
           EX_rd:        out std_logic_vector(3 downto 0)
           );
@@ -62,11 +61,10 @@ begin
         EX_ALUSrc <= '0';
         EX_RegWrite <= '0';
         EX_ALUOp <= "0000";
-        EX_instructionAdd <= x"0000";
         EX_readData1 <= x"0000";
         EX_readData2 <= x"0000";
         EX_signExtend <= x"0000";
-        EX_jumpAddr <= x"0000";
+        EX_rs <= "0000";
         EX_rt <= "0000";
         EX_rd <= "0000";
     else
@@ -80,11 +78,10 @@ begin
             EX_ALUSrc <= ALUSrc;
             EX_RegWrite <=RegWrite;
             EX_ALUOp <= ALUOp;
-            EX_instructionAdd <= ID_instructionAdd;
             EX_readData1 <= ID_readData1;
             EX_readData2 <= ID_readData2;
             EX_signExtend <= ID_signExtend;
-            EX_jumpAddr <= ID_jumpAddr;
+            EX_rs <= ID_rs;
             EX_rt <= ID_rt;
             EX_rd <= ID_rd;
         end if;
