@@ -16,7 +16,7 @@ entity toplevel_pipeline is
 end toplevel_pipeline;
 
 architecture structural of toplevel_pipeline is
-signal ALUZero, PCSrc, PCSrc1:                  std_logic;
+signal ALUZero, PCSrc:                  std_logic;
 signal pc_sig:                          std_logic_vector(15 downto 0);
 signal IFEX_instruction, instruction:   std_logic_vector(15 downto 0);
 signal Instr_mem:                       std_logic_vector(15 downto 0);
@@ -162,7 +162,7 @@ compare: entity work.compareWclock(Behavioral)
                  );
                  
 PCSrc <= Branch and compareRegRead;
-PCSrc1 <= HazardBranch and compareRegRead;
+
 -- branch
 shift_left_2_2: entity work.shift_left_2(Behavioral)
               port map(Din1 => sign_ex,
@@ -242,7 +242,7 @@ hazard_detection_control: entity work.HazardDetectUnit(Behavioral)
                      IFID_rt => instruction(7 downto 4),
                      IFID_rd => instruction(3 downto 0),
                      IDEX_rt => EX_rt,
-                     PCSrc => PCSrc1,
+                     PCSrc => PCSrc,
                      IDEX_Jump => HazardJump,
                      IDEX_MemRead => EX_MemtoReg,
                      IFID_Write => IFIDWrite,
